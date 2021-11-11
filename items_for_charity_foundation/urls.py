@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from charity_app.views import IndexView
+from charity_app.views import IndexView, FormView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", IndexView.as_view(), name="main-menu")
+    path("", IndexView.as_view(), name="main-menu"),
+    path("form/", FormView.as_view(), name="form-view")
 ]

@@ -10,4 +10,10 @@ class IndexView(View):
         return render(request, "index.html")
 
 
+class FormView(View):
 
+    def get(self, request):
+        return render(request, "form.html")
+
+    def post(self, request):
+        return render(request, "form-confirmation.html")
