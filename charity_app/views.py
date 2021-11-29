@@ -4,7 +4,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.views import View
 
-from charity_app.models import Institution, Donation
+from charity_app.models import Institution, Donation, Category
 
 
 class LandingPage(View):
@@ -34,7 +34,14 @@ class LandingPage(View):
 class AddDonation(View):
 
     def get(self, request):
-        return render(request, "form.html")
+        categories = Category.objects.all()
+        institutions = Institution.objects.all()
+        return render(request, "form.html", {"categories": categories, "institutions": institutions})
 
     def post(self, request):
+        return render(request, "form-confirmation.html")
+
+
+class ConfForm(View):
+    def get(self, request):
         return render(request, "form-confirmation.html")

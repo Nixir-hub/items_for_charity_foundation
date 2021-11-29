@@ -17,12 +17,13 @@ from django.contrib import admin
 from django.urls import path, include
 
 from accounts.views import CreateUser
-from charity_app.views import LandingPage, AddDonation
+from charity_app.views import LandingPage, AddDonation, ConfForm
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('django.contrib.auth.urls')),
     path('register/', CreateUser.as_view(), name="register-view"),
     path("", LandingPage.as_view(), name="main-menu"),
-    path("form/", AddDonation.as_view(), name="form-view")
+    path("form/", AddDonation.as_view(), name="form-view"),
+    path("form_com/", ConfForm.as_view(), name="comf-view"),
 ]

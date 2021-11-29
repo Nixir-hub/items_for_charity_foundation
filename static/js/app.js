@@ -235,6 +235,35 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$step.parentElement.hidden = this.currentStep >= 6;
 
       // TODO: get data from inputs and show them in summary
+      let categories = form.getElementsByClassName("description")
+      let input_container = form.querySelectorAll("input")
+      let bag_quantity = input_container[5].value
+
+
+      console.log(input_container[5].value)
+      console.log(input_container)
+      form.addEventListener("click", function (){
+          let street = document.getElementById("adres")
+          let city = document.getElementById("city")
+          let post_code = document.getElementById("post_code")
+          let phone_n = document.getElementById("phone_n")
+          let pick_up_date = document.getElementById("pick_up_date")
+          let pick_up_hour = document.getElementById("pick_up_hour")
+          let for_delivery = document.getElementById("for_delivery")
+          let bags = document.getElementById("bags")
+          let checked = document.querySelectorAll("input:checked")
+          console.log(checked)
+          document.getElementById("bags_quantity").innerHTML = bags.value + " worków z darami"
+          document.getElementById("foundation_name").innerHTML = 'Dla fundacji "' + checked[2].value + '"'
+          document.getElementById("adres_out").innerHTML = "ulica " + street.value
+          document.getElementById("city_out").innerHTML = city.value
+          document.getElementById("post_code_out").innerHTML = post_code.value
+          document.getElementById("phone_n_out").innerHTML = phone_n.value
+          document.getElementById("pick_up_out").innerHTML = pick_up_date.value
+          document.getElementById("time_out").innerHTML = pick_up_hour.value
+          document.getElementById("for_deliver_out").innerHTML = for_delivery.value
+      })
+
     }
 
     /**
