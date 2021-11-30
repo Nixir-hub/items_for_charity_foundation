@@ -5,7 +5,7 @@
       <div class="slogan container container--90">
         <div class="slogan--item">
           <h1>
-            Oddaj rzeczy, których już nie chcesz<br />
+            Oddaj rzeczy, których już nie chcesz<br>
             <span class="uppercase">potrzebującym</span>
           </h1>
 
@@ -53,7 +53,7 @@
       <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/5</div>
 
-        <form action="form-confirmation.html" method="post">
+        <form action="form-confirmation.html" method="POST" id="form">
         {% csrf_token %}
           <!-- STEP 1: class .active is switching steps -->
           <div data-step="1" class="active">
@@ -61,7 +61,7 @@
             {% for category in categories %}
             <div class="form-group form-group--checkbox">
               <label>
-                <input type="checkbox" name="categories" value="{{ category.name }}" />
+                <input type="checkbox" name="categories" value="{{ category.name }}" class="required">
                 <span class="checkbox"></span>
                 <span class="description">{{ category.name }}, {{ category.description }}</span>
               </label>
@@ -79,7 +79,7 @@
             <div class="form-group form-group--inline">
               <label>
                 Liczba 60l worków:
-                <input type="number" id="bags" name="bags" step="1" min="1" value=""/>
+                <input type="number" id="bags" name="bags" step="1" min="1" class="required">
               </label>
             </div>
 
@@ -95,10 +95,11 @@
           <div data-step="3">
             <h3>Wybierz organizacje, której chcesz pomóc:</h3>
             {% for inst in institutions %}
-            <div class="form-group form-group--checkbox">
+            <div class="form-group form-group--checkbox" id="organization_div" style="display:{% if category in inst.categories.all %} inline-block;{% else %} none;{% endif %}">
               <label>
-                <input type="radio" name="organization" id="{{ inst.name }}" value="{{ inst.name }}" />
+                <input type="radio" name="organization" id="{{ inst.name }}" value="{{ inst.name }}" class="required">
                 <span class="checkbox radio"></span>
+
                 <span class="description">
                   <div class="title">{{ inst.name }}</div>
                   <div class="subtitle">Cel i misja: Pomoc {{ inst.description }}</div>
@@ -121,22 +122,22 @@
               <div class="form-section--column">
                 <h4>Adres odbioru</h4>
                 <div class="form-group form-group--inline">
-                  <label> Ulica <input id="adres" type="text" name="address"/> </label>
+                  <label> Ulica <input id="adres" type="text" name="address" class="required"> </label>
                 </div>
 
                 <div class="form-group form-group--inline">
-                  <label> Miasto <input  id="city" type="text" name="city"/> </label>
+                  <label> Miasto <input  id="city" type="text" name="city" class="required"> </label>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label>
-                    Kod pocztowy <input id="post_code" type="text" name="postcode" />
+                    Kod pocztowy <input id="post_code" type="text" name="post_code" class="required">
                   </label>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label>
-                    Numer telefonu <input id="phone_n" type="phone" name="phone" />
+                    Numer telefonu <input id="phone_n" type="phone" name="phone" class="required">
                   </label>
                 </div>
               </div>
@@ -144,17 +145,17 @@
               <div class="form-section--column">
                 <h4>Termin odbioru</h4>
                 <div class="form-group form-group--inline">
-                  <label> Data <input id="pick_up_date" type="date" name="data"/></label>
+                  <label> Data <input id="pick_up_date" type="date" name="data" class="required"></label>
                 </div>
 
                 <div class="form-group form-group--inline">
-                  <label> Godzina <input id="pick_up_hour" type="time" name="time"/></label>
+                  <label> Godzina <input id="pick_up_hour" type="time" name="time" class="required"></label>
                 </div>
 
                 <div class="form-group form-group--inline">
                   <label>
                     Uwagi dla kuriera
-                    <textarea id="for_delivery" name="more_info" rows="5"></textarea>
+                    <textarea id="for_delivery" name="more_info" rows="5" class="required"></textarea>
                   </label>
                 </div>
               </div>

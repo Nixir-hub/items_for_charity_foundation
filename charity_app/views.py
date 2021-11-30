@@ -1,9 +1,10 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views import View
 
+from charity_app.form import MainForm
 from charity_app.models import Institution, Donation, Category
 
 
@@ -34,12 +35,34 @@ class LandingPage(View):
 class AddDonation(View):
 
     def get(self, request):
+        form = MainForm()
         categories = Category.objects.all()
         institutions = Institution.objects.all()
-        return render(request, "form.html", {"categories": categories, "institutions": institutions})
+        return render(request, "form.html", {"form": form, "categories": categories, "institutions": institutions})
 
     def post(self, request):
-        return render(request, "form-confirmation.html")
+        form = MainForm(request.POST)
+        if form.is_valid():
+            quantity = request.POST.get("bags")
+            categories = request.POST.get("categories")
+            institution = request.POST.get("organization")
+            address = request.POST.get("address")
+            phone_number = request.POST.get("phone")
+            city = request.POST.get("city")
+            zip_code = request.POST.get("post_code")
+            pick_up_date = request.POST.get("date")
+            pick_up_time = request.POST.get("time")
+            pick_up_comment = request.POST.get("more_info")
+            user = self.request.user
+            donation = Donation.objects.create(quantity=quantity, categories=categories, institution=institution,
+                                               address=address, phone_number=phone_number, city=city, zip_code=zip_code,
+                                               pick_up_date=pick_up_date, pick_up_time=pick_up_time, pick_up_comment=pick_up_comment,
+                                               user=user)
+            donation.save()
+            return render(request, "form-confirmation.html")
+        else:
+            return redirect("/form")
+
 
 
 class ConfForm(View):
