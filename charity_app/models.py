@@ -29,7 +29,7 @@ class Institution(models.Model):
 
 class Donation(models.Model):
     quantity = models.IntegerField()
-    categories = models.ManyToManyField(Category)
+    categories = models.ManyToManyField(Category, null=True, blank=True)
     institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
     address = models.TextField()
     phone_number = models.PositiveIntegerField()

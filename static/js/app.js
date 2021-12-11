@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
   /**
    * HomePage - Help section
    */
+
   class Help {
     constructor($el) {
       this.$el = $el;
@@ -10,7 +11,56 @@ document.addEventListener("DOMContentLoaded", function() {
       this.currentSlide = this.$buttonsContainer.querySelector(".active").parentElement.dataset.id;
       this.init();
     }
-
+    // validate(){
+    //   if( document.myForm.categories.checked === None ) {
+    //     alert( "Please choose any category!" );
+    //     document.myForm.categories.focus() ;
+    //     return false;
+    //     }
+    //     if( document.myForm.bags.value === "" || isNaN( document.myForm.bags.value ) ) {
+    //       alert( "Please provide quantity of bags!" );
+    //       document.myForm.bags.focus() ;
+    //       return false;
+    //     }
+    //     if( isNaN(document.myForm.organization.checked)) {
+    //       alert( "Please choose one organization." );
+    //       document.myForm.organization.focus() ;
+    //       return false;
+    //     }
+    //     if( document.myForm.post_code.value == "" || isNaN( document.myForm.post_code.value ) ||
+    //       document.myForm.post_code.value.length != 5 ) {
+    //       alert( "Please provide a zip in the format #####." );
+    //       document.myForm.post_code.focus() ;
+    //       return false;
+    //     }
+    //     if( document.myForm.address.value == "" ) {
+    //       alert( "Please provide your country!" );
+    //       document.myForm.address.focus() ;
+    //       return false;
+    //     }
+    //     if( document.myForm.city.value == "" ) {
+    //       alert( "Please provide your city!" );
+    //       document.myForm.city.focus() ;
+    //       return false;
+    //     }
+    //     if( document.myForm.phone.value == "" || isNaN( document.myForm.phone.value ) ||
+    //       document.myForm.phone.value.length != 8) {
+    //       alert( "Please provide your phone!" );
+    //       document.myForm.phone.focus() ;
+    //       return false;
+    //     }
+    //     if(  isNaN( document.myForm.data.value )) {
+    //       alert( "Please provide data!" );
+    //       document.myForm.data.focus() ;
+    //       return false;
+    //     }
+    //     if( isNaN( document.myForm.time.value )) {
+    //       alert( "Please provide time!" );
+    //       document.myForm.time.focus() ;
+    //       return false;
+    //     }
+    //       return true;
+    // }
     init() {
       this.events();
     }
@@ -219,6 +269,7 @@ document.addEventListener("DOMContentLoaded", function() {
      * Show next or previous section etc.
      */
     updateForm() {
+
       this.$step.innerText = this.currentStep;
 
       // TODO: Validation
@@ -229,15 +280,15 @@ document.addEventListener("DOMContentLoaded", function() {
         if (slide.dataset.step == this.currentStep) {
           slide.classList.add("active");
         }
-      });
 
+      });
       this.$stepInstructions[0].parentElement.parentElement.hidden = this.currentStep >= 6;
       this.$step.parentElement.hidden = this.currentStep >= 6;
 
       // TODO: get data from inputs and show them in summary
       let categories = document.querySelectorAll('input[name="categories"]:checked');
       let cat_lst = Array.from(categories)
-      let foundation_container = document.querySelectorAll('input[name="organization"]');
+      // let foundation_container = document.querySelectorAll('input[name="organization"]');
       let foundation = document.querySelector('input[name="organization"]:checked').value;
       let street = document.getElementById("adres")
       let city = document.getElementById("city")
@@ -270,6 +321,7 @@ document.addEventListener("DOMContentLoaded", function() {
       e.preventDefault();
       this.currentStep++;
       this.updateForm();
+
     }
   }
   const form = document.querySelector(".form--steps");
