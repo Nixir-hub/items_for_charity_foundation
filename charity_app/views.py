@@ -42,27 +42,27 @@ class AddDonation(View):
         return render(request, "form.html", {"form": form, "categories": categories, "institutions": institutions})
 
     def post(self, request):
-        # form = MainForm(request.POST)
-        # if form.is_valid():
-        #     quantity = request.POST.get("bags")
-        #     institution = request.POST.get("organization")
-        #     address = request.POST.get("address")
-        #     phone_number = request.POST.get("phone")
-        #     city = request.POST.get("city")
-        #     zip_code = request.POST.get("post_code")
-        #     pick_up_date = request.POST.get("data")
-        #     pick_up_time = request.POST.get("time")
-        #     pick_up_comment = request.POST.get("more_info")
-        #     user = self.request.user
-        #     donation = Donation.objects.create(quantity=quantity,
-        #                                        institution=Institution.objects.get(name=institution),
-        #                                        address=address, phone_number=phone_number, city=city,
-        #                                        zip_code=zip_code, pick_up_date=pick_up_date,
-        #                                        pick_up_time=pick_up_time, pick_up_comment=pick_up_comment, user=user)
-        #     donation.save()
-        #     return redirect("/form_com/")
-        # else:
-        return HttpResponse(f'{request.POST.get("bags")}')
+        form = MainForm(request.POST)
+        if form.is_valid():
+            quantity = request.POST.get("bags")
+            institution = request.POST.get("organization")
+            address = request.POST.get("address")
+            phone_number = request.POST.get("phone")
+            city = request.POST.get("city")
+            zip_code = request.POST.get("post_code")
+            pick_up_date = request.POST.get("data")
+            pick_up_time = request.POST.get("time")
+            pick_up_comment = request.POST.get("more_info")
+            user = self.request.user
+            donation = Donation.objects.create(quantity=quantity,
+                                               institution=Institution.objects.get(name=institution),
+                                               address=address, phone_number=phone_number, city=city,
+                                               zip_code=zip_code, pick_up_date=pick_up_date,
+                                               pick_up_time=pick_up_time, pick_up_comment=pick_up_comment, user=user)
+            donation.save()
+            return redirect("/form_com/")
+        else:
+            return HttpResponse(f'Upss... coś poszło nie tak!')
 
 
 class ConfForm(View):
