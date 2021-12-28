@@ -11,56 +11,56 @@ document.addEventListener("DOMContentLoaded", function() {
       this.currentSlide = this.$buttonsContainer.querySelector(".active").parentElement.dataset.id;
       this.init();
     }
-    // validate(){
-    //   if( document.myForm.categories.checked === None ) {
-    //     alert( "Please choose any category!" );
-    //     document.myForm.categories.focus() ;
-    //     return false;
-    //     }
-    //     if( document.myForm.bags.value === "" || isNaN( document.myForm.bags.value ) ) {
-    //       alert( "Please provide quantity of bags!" );
-    //       document.myForm.bags.focus() ;
-    //       return false;
-    //     }
-    //     if( isNaN(document.myForm.organization.checked)) {
-    //       alert( "Please choose one organization." );
-    //       document.myForm.organization.focus() ;
-    //       return false;
-    //     }
-    //     if( document.myForm.post_code.value == "" || isNaN( document.myForm.post_code.value ) ||
-    //       document.myForm.post_code.value.length != 5 ) {
-    //       alert( "Please provide a zip in the format #####." );
-    //       document.myForm.post_code.focus() ;
-    //       return false;
-    //     }
-    //     if( document.myForm.address.value == "" ) {
-    //       alert( "Please provide your country!" );
-    //       document.myForm.address.focus() ;
-    //       return false;
-    //     }
-    //     if( document.myForm.city.value == "" ) {
-    //       alert( "Please provide your city!" );
-    //       document.myForm.city.focus() ;
-    //       return false;
-    //     }
-    //     if( document.myForm.phone.value == "" || isNaN( document.myForm.phone.value ) ||
-    //       document.myForm.phone.value.length != 8) {
-    //       alert( "Please provide your phone!" );
-    //       document.myForm.phone.focus() ;
-    //       return false;
-    //     }
-    //     if(  isNaN( document.myForm.data.value )) {
-    //       alert( "Please provide data!" );
-    //       document.myForm.data.focus() ;
-    //       return false;
-    //     }
-    //     if( isNaN( document.myForm.time.value )) {
-    //       alert( "Please provide time!" );
-    //       document.myForm.time.focus() ;
-    //       return false;
-    //     }
-    //       return true;
-    // }
+    validate(){
+      if( document.myForm.categories.checked === None ) {
+        alert( "Please choose any category!" );
+        document.myForm.categories.focus() ;
+        return false;
+        }
+        if( document.myForm.bags.value === "" || isNaN( document.myForm.bags.value ) ) {
+          alert( "Please provide quantity of bags!" );
+          document.myForm.bags.focus() ;
+          return false;
+        }
+        if( isNaN(document.myForm.organization.checked)) {
+          alert( "Please choose one organization." );
+          document.myForm.organization.focus() ;
+          return false;
+        }
+        if( document.myForm.post_code.value == "" || isNaN( document.myForm.post_code.value ) ||
+          document.myForm.post_code.value.length != 5 ) {
+          alert( "Please provide a zip in the format #####." );
+          document.myForm.post_code.focus() ;
+          return false;
+        }
+        if( document.myForm.address.value == "" ) {
+          alert( "Please provide your country!" );
+          document.myForm.address.focus() ;
+          return false;
+        }
+        if( document.myForm.city.value == "" ) {
+          alert( "Please provide your city!" );
+          document.myForm.city.focus() ;
+          return false;
+        }
+        if( document.myForm.phone.value == "" || isNaN( document.myForm.phone.value ) ||
+          document.myForm.phone.value.length != 8) {
+          alert( "Please provide your phone!" );
+          document.myForm.phone.focus() ;
+          return false;
+        }
+        if(  isNaN( document.myForm.data.value )) {
+          alert( "Please provide data!" );
+          document.myForm.data.focus() ;
+          return false;
+        }
+        if( isNaN( document.myForm.time.value )) {
+          alert( "Please provide time!" );
+          document.myForm.time.focus() ;
+          return false;
+        }
+          return true;
+    }
     init() {
       this.events();
     }
@@ -72,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function() {
       this.$buttonsContainer.addEventListener("click", e => {
         if (e.target.classList.contains("btn")) {
           this.changeSlide(e);
+          this.validate();
         }
       });
 
@@ -328,3 +329,32 @@ document.addEventListener("DOMContentLoaded", function() {
     new FormSteps(form);
   }
 });
+const divGet = document.getElementById("menu_roll")
+const dropMenu = document.getElementById("sub_menu")
+const mainUlGet = divGet.children[0].children
+const containerUl = Array.from(mainUlGet)
+
+console.log(containerUl)
+
+containerUl.forEach(function (listElem,index){
+    if (mainUlGet[index].children.length !== 0) {
+        mainUlGet[index].children[0].style.display = ""
+        listElem.addEventListener("click", function (event) {
+            dropMenu.style.display = ""
+            console.log(this.innerText)
+
+        })
+        listElem.addEventListener("dblclick", function (event) {
+            dropMenu.style.display = "none"
+            console.log(this.innerText)
+        })
+    }else{
+        listElem.addEventListener("click", function (event) {
+            console.log(this.innerText)
+
+        })
+        listElem.addEventListener("click", function (event) {
+            console.log(this.innerText)
+        })
+    }
+})

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="jumbotron">
+            <h1>{{ donation.pk }}</h1>
+            <p1>{{ donation.quantity }}</p1>
+            <p1>{{ donation.categories }}</p1>
+            <p1>{{ donation.institution }}</p1>
+            <p1>{{ donation.address }}</p1>
+            <p1>{{ donation.phone_number }}</p1>
+            <p1>{{ donation.city }}</p1>
+            <p1>{{ donation.zip_code }}</p1>
+            <p1>{{ donation.pick_up_date }}</p1>
+            <p1>{{ donation.pick_up_time }}</p1>
+            <p1>{{ donation.pick_up_comment }}</p1>
+            <div class="container">
+                <a class="btn btn-dark" href="{{ delivery.get_edit_url }}"> Edytuj dane</a>
+                <a class="btn btn-danger" href="{{ delivery.get_delete_url }}"> Usuń</a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

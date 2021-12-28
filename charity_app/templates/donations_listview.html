@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="jumbotron">
+            <ul>Twoje donacje
+                {% for donation in user.donation_set.all %}
+                    <li>{{ donation }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endblock %}

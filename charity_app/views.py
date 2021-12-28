@@ -1,9 +1,12 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
 from django.views import View
+from django.views.generic import DetailView, ListView
 
 from charity_app.form import MainForm
 from charity_app.models import Institution, Donation, Category
@@ -68,3 +71,25 @@ class AddDonation(View):
 class ConfForm(View):
     def get(self, request):
         return render(request, "form-confirmation.html")
+
+
+class DonationListView(LoginRequiredMixin, ListView):
+    def test_func(self):
+        pk = self.kwargs['pk']
+        try:
+            self.model.objects.get(user=self.request.user, pk=pk)
+            return True
+        except self.model.DoesNotExist:
+            return False
+
+    model = Donation
+    template_name = "donations_listview.html"
+
+
+class UserProfilView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = "profil_detail.html"
+
+    def get_object(self, queryset=None):
+        self.object = self.request.user
+        return self.object

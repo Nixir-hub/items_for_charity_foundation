@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="jumbotron">
+            <h1>Nazwa użytkownika: {{ user }}</h1>
+            <p1>Dane konta</p1>
+        </div>
+            <ul class="list-group">
+                <li class="list-group-item">Imie: {{ user.first_name }}</li>
+                <li class="list-group-item">Nazwisko: {{ user.last_name }}</li>
+                <li class="list-group-item">email: {{ user.email }}</li>
+            </ul>
+        <a class="btn btn-dark" href="/edit_user/"> Edytuj Dane osobowe</a>
+        <a class="btn btn-dark" href="/edit_profil/"> Edytuj Adres i tel</a>
+        <a class="btn btn-warning" href="/password_change/"> Zmień hasło</a>
+        <a class="btn btn-danger" href="/del_profil/"> Usuń</a>
+    {% endif %}
+{% endblock %}

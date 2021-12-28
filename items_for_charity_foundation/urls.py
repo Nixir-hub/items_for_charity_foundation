@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from accounts.views import CreateUser
-from charity_app.views import LandingPage, AddDonation, ConfForm
+from charity_app.views import LandingPage, AddDonation, ConfForm, DonationListView, UserProfilView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,4 +26,6 @@ urlpatterns = [
     path("", LandingPage.as_view(), name="main-menu"),
     path("form/", AddDonation.as_view(), name="form-view"),
     path("form_com/", ConfForm.as_view(), name="comf-view"),
+    path("doantions/", DonationListView.as_view(), name="donation-listview"),
+    path("profil_details/", UserProfilView.as_view(), name="profil-view"),
 ]
